@@ -29,6 +29,7 @@ pipeline {
       parallel {
         stage('validator') {
           steps {
+            build(job: 'ant', propagate: true)
             echo 'Error Found'
           }
         }

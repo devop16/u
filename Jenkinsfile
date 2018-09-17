@@ -13,7 +13,7 @@ pipeline {
             echo 'Error find'
           }
         }
-        stage('Devsecops Approval') {
+        stage('Reviewer') {
           steps {
             echo 'approved'
           }
@@ -21,22 +21,8 @@ pipeline {
       }
     }
     stage('QA') {
-      parallel {
-        stage('QA') {
-          steps {
-            echo 'Push To QA Brunch'
-          }
-        }
-        stage('f') {
-          agent any
-          environment {
-            DEV = 'If Fail'
-          }
-          steps {
-            echo 'FAIL'
-            build 'FE'
-          }
-        }
+      steps {
+        echo 'Push To QA Brunch'
       }
     }
     stage('Security for QA') {

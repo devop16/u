@@ -1,32 +1,13 @@
 pipeline {
   agent none
   stages {
-    stage('Dev') {
-      parallel {
-        stage('Security Steps') {
-          steps {
-            build 'Developer'
-          }
-        }
-        stage('Reviewer') {
-          steps {
-            catchError()
-          }
-        }
-        stage('DevOps Approval') {
-          steps {
-            echo 'approved'
-          }
-        }
+    stage('Reviewer') {
+      steps {
+        echo 'Push to QA team'
       }
     }
-    stage('QA') {
+    stage('Security Steps') {
       parallel {
-        stage('Security Steps') {
-          steps {
-            echo 'qa'
-          }
-        }
         stage('Validator') {
           steps {
             error 'Error find'
@@ -52,9 +33,38 @@ pipeline {
         }
       }
     }
+    stage('QA') {
+      parallel {
+        stage('Production') {
+          steps {
+            echo 'production done'
+          }
+        }
+        stage('Validator') {
+          steps {
+            echo 'Error Found'
+          }
+        }
+        stage('Devops Approval') {
+          steps {
+            echo 'Error found'
+          }
+        }
+        stage('DevSecOps Approval') {
+          steps {
+            waitForQualityGate true
+          }
+        }
+        stage('Team Lead Approval') {
+          steps {
+            echo 'error found'
+          }
+        }
+      }
+    }
     stage('Production') {
       steps {
-        echo 'production done'
+        echo 'Appproved'
       }
     }
   }

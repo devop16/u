@@ -1,12 +1,12 @@
 pipeline {
   agent none
   stages {
-    stage('Reviewer') {
+    stage('DEV') {
       steps {
         echo 'Push to QA team'
       }
     }
-    stage('Security Steps to qa') {
+    stage('Security for DEVS') {
       parallel {
         stage('DevOps Approval') {
           steps {
@@ -25,7 +25,7 @@ pipeline {
         echo 'Push To QA Brunch'
       }
     }
-    stage('Security Steps to production ') {
+    stage('Security for QA') {
       parallel {
         stage('validator') {
           steps {
@@ -49,7 +49,7 @@ pipeline {
         }
       }
     }
-    stage('Production') {
+    stage('PRODUCTION') {
       steps {
         echo 'Push to Main Brunch'
       }

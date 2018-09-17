@@ -6,7 +6,7 @@ pipeline {
         echo 'Push to QA team'
       }
     }
-    stage('Security for DEVS') {
+    stage('Security for DEV') {
       parallel {
         stage('DevOps Approval') {
           steps {

@@ -21,8 +21,21 @@ pipeline {
       }
     }
     stage('QA') {
-      steps {
-        echo 'Push To QA Brunch'
+      parallel {
+        stage('QA') {
+          steps {
+            echo 'Push To QA Brunch'
+          }
+        }
+        stage('f') {
+          agent any
+          environment {
+            DEV = 'If Fail'
+          }
+          steps {
+            echo 'FAIL'
+          }
+        }
       }
     }
     stage('Security for QA') {

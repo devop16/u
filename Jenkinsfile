@@ -34,6 +34,7 @@ pipeline {
           }
           steps {
             echo 'FAIL'
+            build 'FE'
           }
         }
       }

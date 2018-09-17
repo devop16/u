@@ -10,7 +10,7 @@ pipeline {
       parallel {
         stage('Validator') {
           steps {
-            error 'Error find'
+            echo 'Error Found'
           }
         }
         stage('DevOps Approval') {

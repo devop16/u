@@ -6,13 +6,8 @@ pipeline {
         echo 'Push to QA team'
       }
     }
-    stage('Security Steps') {
+    stage('Security Steps to qa') {
       parallel {
-        stage('Validator') {
-          steps {
-            echo 'Error Found'
-          }
-        }
         stage('DevOps Approval') {
           steps {
             echo 'Error find'
@@ -23,48 +18,40 @@ pipeline {
             echo 'approved'
           }
         }
-        stage('Team Lead Approval') {
-          environment {
-            Dev = 'true'
-          }
-          steps {
-            echo 'Team lead approval'
-          }
-        }
       }
     }
     stage('QA') {
+      steps {
+        echo 'Push To QA Brunch'
+      }
+    }
+    stage('Security Steps to production ') {
       parallel {
-        stage('Production') {
-          steps {
-            echo 'production done'
-          }
-        }
-        stage('Validator') {
+        stage('validator') {
           steps {
             echo 'Error Found'
           }
         }
-        stage('Devops Approval') {
+        stage('DevOps Approval') {
           steps {
-            echo 'Error found'
+            echo 'Error Found'
           }
         }
-        stage('DevSecOps Approval') {
+        stage('DevSecops Approval') {
           steps {
-            waitForQualityGate true
+            echo 'Error Found'
           }
         }
         stage('Team Lead Approval') {
           steps {
-            echo 'error found'
+            echo 'Error Found'
           }
         }
       }
     }
     stage('Production') {
       steps {
-        echo 'Appproved'
+        echo 'Push to Main Brunch'
       }
     }
   }
